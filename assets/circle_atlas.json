@@ -1,0 +1,112 @@
+{
+    "frames": [
+        {
+            "filename": "circle_1",
+            "frame": {
+                "w": 165,
+                "h": 184,
+                "x": 0,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "circle_2",
+            "frame": {
+                "w": 165,
+                "h": 184,
+                "x": 0,
+                "y": 184
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "circle_3",
+            "frame": {
+                "w": 165,
+                "h": 184,
+                "x": 0,
+                "y": 368
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "circle_4",
+            "frame": {
+                "w": 165,
+                "h": 184,
+                "x": 0,
+                "y": 552
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "circle_5",
+            "frame": {
+                "w": 165,
+                "h": 184,
+                "x": 0,
+                "y": 736
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "circle_6",
+            "frame": {
+                "w": 165,
+                "h": 184,
+                "x": 0,
+                "y": 920
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "circle_7",
+            "frame": {
+                "w": 165,
+                "h": 184,
+                "x": 0,
+                "y": 1104
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "circle_8",
+            "frame": {
+                "w": 165,
+                "h": 184,
+                "x": 0,
+                "y": 1288
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        }
+    ],
+    "meta": {
+        "description": "Atlas generado con Atlas Packer Gamma V2",
+        "web": "https://gammafp.github.io/atlas-packer-phaser/"
+    }
+}
