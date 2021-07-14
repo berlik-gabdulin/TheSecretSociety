@@ -1,8 +1,10 @@
 import { sprites, doggyArr } from "./assets.js";
 import { setDoggy } from "./doggy.js";
 import { setIntro } from "./intro.js";
+import { setOutro } from "./outro.js";
 import { overlay } from "./overlay.js";
 import { setPlayBtn } from "./playBtn.js";
+import { rotateHandler } from "./rotateHandler.js";
 
 export const sizeL = {
 	width: 1075,
@@ -18,6 +20,7 @@ export const state = {
 	intro: true,
 	hiddenDogs: 5,
 	outro: false,
+	objects: [],
 };
 
 export default class MainScene extends Phaser.Scene {
@@ -40,30 +43,37 @@ export default class MainScene extends Phaser.Scene {
 		// Background
 		let container, back;
 
-		const setBackground = (scene, sizeL, bgImg) => {
+		const setBackground = (scene, bgImg) => {
 			// Background init
 			container = scene.add.container(sizeL.width / 2, sizeL.height / 2);
 			back = scene.add.image(0, 0, bgImg);
-			container.width = sizeL.width / 2;
-			container.height = sizeL.height / 2;
 
-			back.width = sizeL.width / 2;
-			back.height = sizeL.height / 2;
+			if (window.innerHeight < window.innerWidth) {
+				back.setScale(1);
+			} else if (window.innerHeight > window.innerWidth) {
+				back.setScale(1.8);
+			}
+
+			scene.scale.on("orientationchange", (orientation) => {
+				if (orientation === Phaser.Scale.PORTRAIT) {
+					back.setScale(1.8);
+				} else {
+					back.setScale(1);
+				}
+			});
+
+			back.portrait = { x: -sizeP.width / 2.5, y: 0 };
+			back.landscape = { x: 0, y: 0 };
+
 			container.add(back);
+			state.objects.push(back);
 		};
 
-		setBackground(this, sizeL, "background");
-		setDoggy(this, doggyArr, state);
+		setBackground(this, "background");
+		setDoggy(this, doggyArr);
 		setIntro(this);
 		setPlayBtn(this);
-
-		this.scale.on("orientationchange", function (orientation) {
-			if (orientation === Phaser.Scale.PORTRAIT) {
-				console.log("Phaser.Scale.PORTRAIT");
-			} else if (orientation === Phaser.Scale.LANDSCAPE) {
-				console.log("Phaser.Scale.LANDSCAPE");
-			}
-		});
+		rotateHandler(this);
 	}
 
 	update() {

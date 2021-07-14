@@ -1,10 +1,13 @@
-export const overlay = (fade, texts, sprites, scene, sizeL) => {
+import { sizeL, sizeP, state } from "./MainScene.js";
+import { setKeys } from "./setKeys.js";
+
+export const overlay = (fade, texts, sprites, scene) => {
 	// Overlay
-	const rectangle = scene.add.rectangle(
+	let rectangle = scene.add.rectangle(
 		sizeL.width / 2,
 		sizeL.height / 2,
-		sizeL.width,
-		sizeL.height,
+		sizeL.width * 3,
+		sizeL.height * 3,
 		"#ff0000",
 		0.8
 	);
@@ -14,42 +17,41 @@ export const overlay = (fade, texts, sprites, scene, sizeL) => {
 	container.add(rectangle);
 
 	sprites.map((item) => {
-		let sprite = scene.add
-			.sprite(item.xL, item.yL, item.title)
-			.setScale(item.scale ? item.scale : 1)
-			.setFlip(item.flip ? item.flip : false)
-			.setOrigin(item.origin ? item.origin : 0.5);
+		let sprite = scene.add.sprite(0, 0, item.title);
+
+		setKeys(sprite, item);
 
 		container.add(sprite);
+		state.objects.push(sprite);
 	});
 
 	texts.map((text) => {
 		const overlayText = scene.add
-			.text(text.xL, text.yL, text.text, {
-				fontSize: text?.config?.fontSize,
-				fontFamily: text?.config?.fontFamily,
-				fontStyle: text?.config?.fontStyle,
-			})
+			.text(0, 0, text.text)
 			.setOrigin(text.origin ? text.origin : 0.5);
 
-		let fillColor = overlayText.context.createLinearGradient(
-			0,
-			0,
-			0,
-			overlayText.height
-		);
-		text.colorArr.map((color, index) => {
-			fillColor.addColorStop(index, color);
-		});
+		let fillColor = overlayText.context.createLinearGradient(0, 0, 0, 300);
+		console.log("overlayText: ", overlayText.height);
 
-		overlayText.setFill(fillColor);
-		console.log("fillColor: ", fillColor);
+		if (text.colorArr.length > 1) {
+			text.colorArr.map((color, index) => {
+				fillColor.addColorStop(index, color);
+				console.log("fillColor: ", fillColor);
+			});
+		} else {
+			fillColor = text.colorArr[0];
+		}
+
+		overlayText.setColor(fillColor);
+		overlayText.fillColor = fillColor;
 		overlayText.width = text.width ? text.width : sizeL.width;
 		overlayText.height = text.height ? text.height : sizeL.height;
 
-		overlayText.width = text.width;
+		setKeys(overlayText, text);
 
 		container.add(overlayText);
+
+		state.objects.push(overlayText);
 	});
 
 	container.alpha = fade === "fadeIn" ? 0 : 1;
