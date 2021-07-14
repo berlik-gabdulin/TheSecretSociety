@@ -24,33 +24,26 @@ export const overlay = (fade, texts, sprites, scene, sizeL) => {
 	});
 
 	texts.map((text) => {
-		let overlayText;
-		let fillColor;
-
-		overlayText = scene.add
+		const overlayText = scene.add
 			.text(text.xL, text.yL, text.text, {
 				fontSize: text?.config?.fontSize,
 				fontFamily: text?.config?.fontFamily,
 				fontStyle: text?.config?.fontStyle,
-				// fill: fillColor ? fillColor : "#ffffff",
 			})
 			.setOrigin(text.origin ? text.origin : 0.5);
 
-		fillColor = overlayText.context.createLinearGradient(
+		let fillColor = overlayText.context.createLinearGradient(
 			0,
 			0,
 			0,
 			overlayText.height
 		);
+		text.colorArr.map((color, index) => {
+			fillColor.addColorStop(index, color);
+		});
 
-		fillColor.addColorStop(0, "#2335ff");
-		fillColor.addColorStop(1, "#549900");
-		// if (text.colorArr.length > 1) {
-		// 	text.colorArr.map((color, index) => {
-		// 		fillColor.addColorStop(index, color);
-		// 	});
-		// 	overlayText.style.fill = fillColor;
-		// }
+		overlayText.setFill(fillColor);
+		console.log("fillColor: ", fillColor);
 		overlayText.width = text.width ? text.width : sizeL.width;
 		overlayText.height = text.height ? text.height : sizeL.height;
 
