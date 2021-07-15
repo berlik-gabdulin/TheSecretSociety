@@ -39,6 +39,7 @@ landscape: {
 ## rotateHandler.js
 
 Содержит 2 функции, **rotateHandlerOnLoad** и **rotateHandler**.
+
 **rotateHandlerOnLoad** принимает так же сцену и ориентацию экрана, перебирает **state.objects**, и в соответствии с ориентацией экрана настраивает все объекты - положение на экране, origin, scale и тд.
 
 **rotateHandler** по сути только следит за сменой ориентации экрана и вызывает **rotateHandlerOnLoad** на каждое изменение передавая соответствующее значение.
